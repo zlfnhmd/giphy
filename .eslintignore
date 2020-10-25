@@ -1,0 +1,12 @@
+!.eslintrc.js
+!.prettierrc.js
+!next.config.js
+!babel.config.js
+!jest.config.js
+.next
+.vscode
+.github
+node_modules
+next-env.d.ts
+coverage/
+lint-report.html
