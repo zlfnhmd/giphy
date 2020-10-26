@@ -3,7 +3,6 @@ import chunk from 'lodash/chunk';
 
 import { useWindowSize } from '../../../utils/useWindowSize';
 import { TrendingStoreContext } from '../store';
-import { TRENDING_STORE_ACTION } from '../types';
 
 import { GridRow } from './GridRow';
 
@@ -11,7 +10,6 @@ export const GifGrid = () => {
   const { width } = useWindowSize();
   const {
     trendingState: { gifData },
-    dispatch,
   } = useContext(TrendingStoreContext);
   const [gridRows, setGridRows] = useState<number>(4);
 
@@ -33,15 +31,10 @@ export const GifGrid = () => {
     }
   }, [width]);
 
-  const handleClick = (index: number) => {
-    dispatch({ type: TRENDING_STORE_ACTION.VISIBLE_GIF_INDEX, payload: index });
-    dispatch({ type: TRENDING_STORE_ACTION.TOGGLE_MODAL, payload: true });
-  };
-
   return (
     <>
       {gifDataByRow.map((rowData, rowIndex) => (
-        <GridRow rows={gridRows} key={`gif-row-${rowIndex}`} rowData={rowData} handleClick={handleClick} />
+        <GridRow totalRows={gridRows} key={`gif-row-${rowIndex}`} rowData={rowData} />
       ))}
     </>
   );

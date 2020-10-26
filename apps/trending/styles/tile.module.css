@@ -1,4 +1,10 @@
 .tileContainer {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
   cursor: pointer;
   margin: 5px 0px;
 }
