@@ -1,0 +1,16 @@
+.tileContainer {
+  cursor: pointer;
+  margin: 5px 0px;
+}
+
+.tileContainer:first-child {
+  margin-top: 0px;
+}
+
+.tileContainer:last-child {
+  margin-bottom: 0px;
+}
+
+.tileImg {
+  width: 100%
+}

@@ -1,5 +1,7 @@
 import React, { useReducer } from 'react';
 
+import styles from './styles/trending.module.css';
+
 import { GifGrid } from './components/GifGrid';
 import { Modal } from './components/Modal';
 import { TrendingStoreContext, trendingStoreReducer } from './store';
@@ -17,8 +19,10 @@ export const Trending = (props: TrendingPageProps) => {
 
   return (
     <TrendingStoreContext.Provider value={{ trendingState: globalState, dispatch }}>
-      <GifGrid />
-      <Modal />
+      <div className={styles.trendingContainer}>
+        <GifGrid />
+        <Modal />
+      </div>
     </TrendingStoreContext.Provider>
   );
 };

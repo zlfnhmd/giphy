@@ -1,0 +1,11 @@
+.gridRowContainer {
+  margin: 5px;
+}
+
+.gridRowContainer:first-child {
+  margin-left: 0px;
+}
+
+.gridRowContainer:last-child {
+  margin-right: 0px;
+}
