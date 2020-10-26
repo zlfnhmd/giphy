@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { BsCaretLeftFill, BsCaretRightFill, BsXSquareFill } from 'react-icons/bs';
 
 import { TrendingStoreContext } from '../store';
 import { TRENDING_STORE_ACTION } from '../types';
@@ -7,7 +8,7 @@ import { TRENDING_STORE_ACTION } from '../types';
 const fadeIn = keyframes`from { opacity: 0; }`;
 
 export const Modal = () => {
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const {
     trendingState: { gifData, isModalVisible, visibleGifIndex },
     dispatch,
@@ -18,7 +19,7 @@ export const Modal = () => {
   };
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         closeModal();
       }
@@ -52,47 +53,46 @@ export const Modal = () => {
             height: '100%',
           }}
         >
-          <div style={{ textAlign: 'center' }}>
-            <button onClick={closeModal}>CLOSE MODAL</button>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+            <NavigationButton onClick={() => arrowHandler('left')}>
+              <BsCaretLeftFill style={{ color: 'white' }} />
+            </NavigationButton>
+            <NavigationButton onClick={() => arrowHandler('right')}>
+              <BsCaretRightFill style={{ color: 'white' }} />
+            </NavigationButton>
+            <NavigationButton style={{ marginLeft: 'auto' }} onClick={closeModal}>
+              <BsXSquareFill style={{ color: 'white' }} />
+            </NavigationButton>
           </div>
           <div
             style={{
               flexGrow: 1,
+              height: '80%',
               marginTop: '5px',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
+              textAlign: 'center',
             }}
           >
-            <div style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-              <button onClick={() => arrowHandler('left')}>Prev</button>
-            </div>
-            <div
-              style={{
-                border: '1px red solid',
-                margin: '0px 10px',
-                flexGrow: 1,
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                alt='asd'
-                style={{ height: '100%', maxWidth: '100%' }}
-                src={gifData[visibleGifIndex].images.original.url}
-              />
-            </div>
-            <div style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-              <button onClick={() => arrowHandler('right')}>Next</button>
-            </div>
+            <img
+              alt='asd'
+              style={{ height: '100%', maxWidth: '100%' }}
+              src={gifData[visibleGifIndex].images.original.url}
+            />
           </div>
         </div>
       </Dialog>
     </Overlay>
   ) : null;
 };
+
+const NavigationButton = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+  cursor: pointer;
+`;
 
 const Overlay = styled.div`
   animation: ${fadeIn} 200ms ease-out;
@@ -108,7 +108,7 @@ const Overlay = styled.div`
 `;
 
 const Dialog = styled.div`
-  background: white;
+  background: black;
   border-radius: 5px;
   padding: 20px;
   position: absolute;
