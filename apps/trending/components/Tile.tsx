@@ -10,6 +10,7 @@ interface TileProps {
 
 export const Tile = (props: TileProps) => {
   const { imageIndex, imageUrl, handleClick } = props;
+
   return (
     <div
       className={styles.tileContainer}

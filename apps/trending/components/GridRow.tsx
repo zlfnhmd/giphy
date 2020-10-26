@@ -21,16 +21,9 @@ export const GridRow = (props: GridRowProps) => {
 
   return (
     <GridRowContainer className={styles.gridRowContainer}>
-      {props.rowData.map((image, index) =>
-        index < 5 ? (
-          <Tile
-            key={image.id}
-            handleClick={props.handleClick}
-            imageIndex={index}
-            imageUrl={image.images.original.url}
-          />
-        ) : null
-      )}
+      {props.rowData.map((image, index) => (
+        <Tile key={image.id} handleClick={props.handleClick} imageIndex={index} imageUrl={image.images.original.url} />
+      ))}
     </GridRowContainer>
   );
 };
