@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { TrendingStoreContext } from '../store';
@@ -7,6 +7,7 @@ import { TRENDING_STORE_ACTION } from '../types';
 const fadeIn = keyframes`from { opacity: 0; }`;
 
 export const Modal = () => {
+  const modalRef = useRef(null);
   const {
     trendingState: { gifData, isModalVisible, visibleGifIndex },
     dispatch,
@@ -15,6 +16,19 @@ export const Modal = () => {
   const closeModal = () => {
     dispatch({ type: TRENDING_STORE_ACTION.TOGGLE_MODAL, payload: false });
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeModal();
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalRef]);
 
   const arrowHandler = (direction: 'left' | 'right') => {
     const currentPosition = visibleGifIndex;
@@ -29,7 +43,7 @@ export const Modal = () => {
 
   return isModalVisible ? (
     <Overlay>
-      <Dialog>
+      <Dialog ref={modalRef}>
         <div
           style={{
             display: 'flex',
@@ -64,7 +78,11 @@ export const Modal = () => {
                 justifyContent: 'center',
               }}
             >
-              <img style={{ height: '100%', maxWidth: '100%' }} src={gifData[visibleGifIndex].images.original.url} />
+              <img
+                alt='asd'
+                style={{ height: '100%', maxWidth: '100%' }}
+                src={gifData[visibleGifIndex].images.original.url}
+              />
             </div>
             <div style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
               <button onClick={() => arrowHandler('right')}>Next</button>
