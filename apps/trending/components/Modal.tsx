@@ -68,13 +68,15 @@ export const Modal = () => {
             style={{
               flexGrow: 1,
               height: '80%',
-              marginTop: '5px',
-              textAlign: 'center',
+              marginTop: '10px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <img
               alt='asd'
-              style={{ height: '100%', maxWidth: '100%' }}
+              style={{ maxHeight: '100%', maxWidth: '100%' }}
               src={gifData[visibleGifIndex].images.original.url}
             />
           </div>
