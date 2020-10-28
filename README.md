@@ -15,6 +15,6 @@ npm i
 
 3. Start local server
 ```bash
-npm run dev
+GIPHY_API='YOUR_GIPHY_API_KEY' npm run dev
 ```
  The app will be accessible at http://localhost:3000/
